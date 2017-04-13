@@ -1,0 +1,24 @@
+{
+  "name": "man.web",
+  "scripts": {
+  },
+  "env": {
+    "PREBUILD": {
+      "description": "RUN postinstall script",
+      "value": "true"
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1
+    }
+  },
+  "addons": [
+
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ]
+}

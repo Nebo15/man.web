@@ -1,0 +1,19 @@
+.langs {
+  color: #bab7b0;
+
+  &__item {
+    & + & {
+      margin-left: 5px;
+
+      &::before {
+        content: '|';
+        margin-right: 5px;
+        color: #bab7b0;
+      }
+    }
+
+    &.active {
+      color: #f38b00;
+    }
+  }
+}
