@@ -1,9 +1,10 @@
 # MAN Web
-[![Build Status](https://travis-ci.com/Nebo15/man.web.svg?branch=master)](https://travis-ci.com/Nebo15/man.web)
+
+[![Build Status](https://travis-ci.org/Nebo15/man.web.svg?branch=master)](https://travis-ci.org/Nebo15/man.web)
 
 MAN UI project.
 
-Api: https://github.com/Nebo15/man.api
+Api: https://github.com/Nebo15/man.api    
 Dev: http://man-web.herokuapp.com/
 
 ## Technologies
