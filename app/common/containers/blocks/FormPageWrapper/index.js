@@ -20,7 +20,7 @@ export default class FormPageWrapper extends React.Component {
   }
 
   render() {
-    const { title, children, ...props } = this.props;
+    const { title, children, back, ...props } = this.props; // eslint-disable-line
 
     return (
       <div {...props}>

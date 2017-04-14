@@ -89,7 +89,8 @@ export default class TemplateForm extends React.Component {
             placeholder="Type in template value"
             component={FieldCode}
             mode={{
-              name: 'handlebars', base: 'text/html',
+              name: 'handlebars',
+              base: 'text/html',
               htmlMode: true,
               matchClosing: true,
               alignCDATA: true,

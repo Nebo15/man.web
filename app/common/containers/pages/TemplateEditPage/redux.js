@@ -1,18 +1,8 @@
-import { combineReducers } from 'redux';
-import { handleAction, createAction } from 'redux-actions';
+import { push } from 'react-router-redux';
 import * as fromTemplates from 'redux/templates';
 
-export const showTemplates = createAction('templateListPage/SHOW_TEMPLATES');
-
-export const fetchTemplates = () => dispatch =>
-  dispatch(fromTemplates.fetchTemplates({ limit: 100 }))
-  .then((action) => {
-    if (action.error) throw action;
-    return dispatch(showTemplates(action.payload.result));
+export const updateTemplate = (templateId, values) => dispatch =>
+  dispatch(fromTemplates.updateTemplate(templateId, values)).then((action) => {
+    if (action.error) return action;
+    return dispatch(push('/templates'));
   });
-
-const templates = handleAction(showTemplates, (state, action) => action.payload, []);
-
-export default combineReducers({
-  templates,
-});
