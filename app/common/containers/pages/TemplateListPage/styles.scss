@@ -8,6 +8,12 @@
     overflow: hidden;
     text-overflow: ellipsis;
     vertical-align: bottom;
+
+    p {
+      font-size: 11px;
+      line-height: 1.1;
+      color: #929499;
+    }
   }
 }
 

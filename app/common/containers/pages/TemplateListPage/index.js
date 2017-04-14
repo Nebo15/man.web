@@ -5,41 +5,45 @@ import withStyles from 'nebo15-isomorphic-style-loader/lib/withStyles';
 import { H1 } from 'components/Title';
 import Table from 'components/Table';
 import Button from 'components/Button';
+import Tags from 'components/Tags';
 // import Pagination from 'components/Pagination';
 
-import { getApis } from 'reducers';
+import { getTemplates } from 'reducers';
 
-import { fetchApis } from './redux';
+import { fetchTemplates } from './redux';
 import styles from './styles.scss';
 
 @withStyles(styles)
 @provideHooks({
-  fetch: ({ dispatch }) => dispatch(fetchApis()),
+  fetch: ({ dispatch }) => dispatch(fetchTemplates()),
 })
 @connect(state => ({
-  ...state.pages.ApiListPage,
-  apis: getApis(state, state.pages.ApiListPage.apis),
+  ...state.pages.TemplateListPage,
+  templates: getTemplates(state, state.pages.TemplateListPage.templates),
 }))
-export default class ApiListPage extends React.Component {
+export default class TemplateListPage extends React.Component {
   render() {
-    const { apis = [] } = this.props;
+    const { templates = [] } = this.props;
     return (
-      <div id="api-list-page">
-        <H1>API's</H1>
-        <p>Select API to edit API’s plugins</p>
-        <div id="api-table" className={styles.table}>
+      <div id="template-list-page">
+        <H1>Templates</H1>
+        <p>Select template to edit</p>
+        <div id="templates-table" className={styles.table}>
           <Table
             columns={[
-              { key: 'name', title: 'Name', width: '150px' },
-              { key: 'host', title: 'Host' },
-              { key: 'methods', title: 'Methods', width: '190px' },
-              { key: 'action', title: 'Action', width: '100px' },
+              { key: 'name', title: 'Name' },
+              { key: 'syntax', title: 'Syntax' },
+              { key: 'locales', title: 'Locales' },
+              { key: 'action', title: 'Action' },
             ]}
-            data={apis.map(i => ({
-              name: <span className={styles.name}>{i.name}</span>,
-              host: <span style={{ wordBreak: 'break-all' }}>{`${i.request.scheme}://${i.request.host}:${i.request.port}${i.request.path}`}</span>,
-              methods: i.request.methods.join(', ').toUpperCase(),
-              action: (<Button id={`edit-api-button-${i.name}`} theme="link" to={`apis/${i.id}`}>Edit&nbsp;API</Button>),
+            data={templates.map(i => ({
+              name: <div className={styles.name}>
+                {i.title}
+                <p>{i.description}</p>
+              </div>,
+              syntax: i.syntax,
+              locales: <Tags tags={i.locales} formatter={i => i.locale} />,
+              action: (<Button id={`edit-template-button-${i.name}`} theme="link" to={`templates/${i.id}`}>Edit&nbsp;Template</Button>),
             }))}
           />
           {

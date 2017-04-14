@@ -1,8 +1,8 @@
 import { handleAction, combineActions } from 'redux-actions';
 import { API_URL } from 'config';
-import { normalize, arrayOf } from 'normalizr';
+import { normalize } from 'normalizr';
 import { createUrl } from 'helpers/url';
-import { templateSchema } from 'schemas';
+import { template } from 'schemas';
 import { invoke } from './api';
 
 export const fetchTemplates = options => invoke({
@@ -14,7 +14,7 @@ export const fetchTemplates = options => invoke({
   types: ['templates/FETCH_LIST_REQUEST', {
     type: 'templates/FETCH_LIST_SUCCESS',
     payload: (action, state, res) => res.json().then(
-      json => normalize(json.data, arrayOf(templateSchema))
+      json => normalize(json.data, [template])
     ),
   }, 'templates/FETCH_LIST_FAILURE'],
 });
@@ -28,7 +28,7 @@ export const fetchApi = (apiId, options) => invoke({
   types: ['templates/FETCH_DETAILS_REQUEST', {
     type: 'templates/FETCH_DETAILS_SUCCESS',
     payload: (action, state, res) => res.json().then(
-      json => normalize(json.data, templateSchema)
+      json => normalize(json.data, template)
     ),
   }, 'templates/FETCH_DETAILS_FAILURE'],
 });
@@ -43,7 +43,7 @@ export const createApi = (body, options) => invoke({
   types: ['templates/CREATE_REQUEST', {
     type: 'templates/CREATE_SUCCESS',
     payload: (action, state, res) => res.json().then(
-      json => normalize(json.data, templateSchema)
+      json => normalize(json.data, template)
     ),
   }, 'templates/CREATE_FAILURE'],
 });
@@ -58,7 +58,7 @@ export const updateApi = (apiId, body, options) => invoke({
   types: ['templates/UPDATE_REQUEST', {
     type: 'templates/UPDATE_SUCCESS',
     payload: (action, state, res) => res.json().then(
-      json => normalize(json.data, templateSchema)
+      json => normalize(json.data, template)
     ),
   }, 'templates/UPDATE_FAILURE'],
 });

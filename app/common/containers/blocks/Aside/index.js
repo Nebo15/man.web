@@ -18,6 +18,7 @@ import styles from './styles.scss';
 export default class Aside extends React.Component {
 
   render() {
+    const { active, toggleMenu } = this.props;
     return (
       <aside className={styles.aside}>
         { /* eslint-disable jsx-a11y/anchor-has-content */ }
@@ -25,16 +26,15 @@ export default class Aside extends React.Component {
         <hr className={styles.line} />
 
         <Link to="/templates/create" className={styles.add}>
-          <Icon name="add" />
-          Create template
+          <Icon name="add" /> Create
         </Link>
 
         <hr className={styles.line} />
 
-        <Nav isOpen={this.props.active} />
+        <Nav isOpen={active} />
 
         <div className={styles['menu-control']}>
-          <Gamburger isOpen={this.props.active} onToggle={this.props.toggleMenu} />
+          <Gamburger isOpen={active} onToggle={toggleMenu} />
         </div>
       </aside>
     );
