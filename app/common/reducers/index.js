@@ -12,7 +12,6 @@ import templates from 'redux/templates';
 import Aside from 'containers/blocks/Aside/redux';
 
 import TemplateListPage from 'containers/pages/TemplateListPage/redux';
-import TemplateEditPage from 'containers/pages/TemplateEditPage/redux';
 
 const blocks = combineReducers({
   Aside,
@@ -20,7 +19,6 @@ const blocks = combineReducers({
 
 const pages = combineReducers({
   TemplateListPage,
-  TemplateEditPage,
 });
 
 const data = combineReducers({

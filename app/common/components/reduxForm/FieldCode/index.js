@@ -3,9 +3,6 @@ import React from 'react';
 import CodeMirror from 'react-codemirror';
 import withStyles from 'nebo15-isomorphic-style-loader/lib/withStyles';
 
-import 'codemirror/mode/handlebars/handlebars.js';
-import 'codemirror/mode/xml/xml.js';
-
 import codeMirrorStyles from 'codemirror/lib/codemirror.css';
 import lintStyles from 'codemirror/addon/lint/lint.css';
 import styles from './styles.scss';
