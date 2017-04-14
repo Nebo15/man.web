@@ -1,6 +1,6 @@
 import React from 'react';
 import { translate } from 'react-i18next';
-import { ErrorMessages, ErrorMessage } from 'modules/validate';
+import { ErrorMessages, ErrorMessage } from 'react-nebo15-validate';
 
 @translate()
 export default class ErrorMessagesTranslated extends React.Component {
