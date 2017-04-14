@@ -1,8 +1,6 @@
 import { handleAction, combineActions } from 'redux-actions';
 import { API_URL } from 'config';
-import { normalize } from 'normalizr';
 import { createUrl } from 'helpers/url';
-import { label } from 'schemas';
 import { invoke } from './api';
 
 export const fetchLabels = options => invoke({
@@ -11,12 +9,7 @@ export const fetchLabels = options => invoke({
   headers: {
     'content-type': 'application/json',
   },
-  types: ['labels/FETCH_LIST_REQUEST', {
-    type: 'labels/FETCH_LIST_SUCCESS',
-    payload: (action, state, res) => res.json().then(
-      json => normalize(json.data, [label])
-    ),
-  }, 'labels/FETCH_LIST_FAILURE'],
+  types: ['labels/FETCH_LIST_REQUEST', 'labels/FETCH_LIST_SUCCESS', 'labels/FETCH_LIST_FAILURE'],
 });
 
 export default handleAction(
@@ -26,7 +19,7 @@ export default handleAction(
   ),
   (state, action) => ({
     ...state,
-    ...action.payload.entities.labels,
+    ...action.payload.data,
   }),
   {}
 );
