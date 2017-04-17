@@ -42,7 +42,7 @@ export default class TemplateListPage extends React.Component {
                 <p>{i.description}</p>
               </div>,
               syntax: i.syntax,
-              locales: <Tags tags={i.locales} formatter={i => i.locale} />,
+              locales: <Tags tags={i.locales} formatter={i => i.code} />,
               action: (<Button id={`edit-template-button-${i.name}`} theme="link" to={`/templates/${i.id}`}>Edit&nbsp;Template</Button>),
             }))}
           />
