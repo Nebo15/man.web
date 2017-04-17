@@ -1,6 +1,6 @@
 import React from 'react';
-import Textarea from 'components/Textarea';
+import Input from 'components/Input';
 
 import FieldInput from './FieldInput';
 
-export default props => <FieldInput component={Textarea} {...props} />;
+export default props => <FieldInput component={Input} inputComponent="textarea" {...props} />;

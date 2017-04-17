@@ -20,15 +20,15 @@ export default class FormPageWrapper extends React.Component {
   }
 
   render() {
-    const { id, title, children } = this.props;
+    const { title, children, back, ...props } = this.props; // eslint-disable-line
 
     return (
-      <div id={id}>
+      <div {...props}>
         <H1>
           <span onClick={() => this.goBack()} className={styles.back}>
             <Icon name="arrow-left-large" />
           </span>
-          <div className={styles.title}>{title}</div>
+          <span className={styles.title}>{title}</span>
         </H1>
         {children}
       </div>

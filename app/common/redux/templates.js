@@ -19,7 +19,7 @@ export const fetchTemplates = options => invoke({
   }, 'templates/FETCH_LIST_FAILURE'],
 });
 
-export const fetchApi = (apiId, options) => invoke({
+export const fetchTemplate = (apiId, options) => invoke({
   endpoint: createUrl(`${API_URL}/templates/${apiId}`, options),
   method: 'GET',
   headers: {
@@ -33,7 +33,7 @@ export const fetchApi = (apiId, options) => invoke({
   }, 'templates/FETCH_DETAILS_FAILURE'],
 });
 
-export const createApi = (body, options) => invoke({
+export const createTemplate = (body, options) => invoke({
   endpoint: createUrl(`${API_URL}/templates`, options),
   method: 'POST',
   headers: {
@@ -48,7 +48,7 @@ export const createApi = (body, options) => invoke({
   }, 'templates/CREATE_FAILURE'],
 });
 
-export const updateApi = (apiId, body, options) => invoke({
+export const updateTemplate = (apiId, body, options) => invoke({
   endpoint: createUrl(`${API_URL}/templates/${apiId}`, options),
   method: 'PUT',
   headers: {
@@ -63,7 +63,7 @@ export const updateApi = (apiId, body, options) => invoke({
   }, 'templates/UPDATE_FAILURE'],
 });
 
-export const deleteApi = (apiId, body, options) => invoke({
+export const deleteTemplate = (apiId, body, options) => invoke({
   endpoint: createUrl(`${API_URL}/templates/${apiId}`, options),
   method: 'DELETE',
   headers: {

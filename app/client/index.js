@@ -1,5 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+
+import 'codemirror/mode/handlebars/handlebars.js';
+import 'codemirror/mode/xml/xml.js';
+
 import { AppContainer } from 'react-hot-loader';
 
 import CookieDough from 'cookie-dough';
