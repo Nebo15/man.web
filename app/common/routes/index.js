@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route } from 'react-router';
+import { Route, IndexRedirect } from 'react-router';
 
 import App from 'containers/layouts/App';
 import Main from 'containers/layouts/Main';
@@ -17,6 +17,7 @@ export const configureRoutes = ({ store }) => { // eslint-disable-line
         <Route path="/">
           <Route path="templates" component={TemplateListPage} />
           <Route path="templates/:templateId" component={TemplateEditPage} />
+          <IndexRedirect to="templates" />
           <Route path="*" component={NotFoundPage} />
         </Route>
       </Route>
