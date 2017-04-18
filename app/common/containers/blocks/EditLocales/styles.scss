@@ -1,0 +1,56 @@
+
+.select {
+  background: #f7f7f7;
+  box-shadow: inset 0 0 0 1px #dedede;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  &__list {
+    white-space: nowrap;
+    overflow: auto;
+    flex: 1 1 auto;
+  }
+
+  &__item {
+    display: inline-block;
+    vertical-align: top;
+    padding: 0 20px;
+  }
+
+  &__item,
+  &__add {
+    height: 50px;
+    box-sizing: border-box;
+    box-shadow: inset 0 0 0 1px #dedede;
+    cursor: pointer;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+
+    &::before {
+      content: '';
+      display: inline-block;
+      vertical-align: middle;
+      height: 100%;
+    }
+  }
+
+  &__text {
+    vertical-align: middle;
+  }
+
+  &__add {
+    flex: 0 0 auto;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 12px;
+    text-align: center;
+    width: 50px;
+
+    i {
+      vertical-align: middle;
+    }
+  }
+}

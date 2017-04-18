@@ -28,7 +28,7 @@ export default class TemplateEditPage extends React.Component {
     const { template } = this.props;
     return (
       <FormPageWrapper id="template-edit-page" title={`Edit ${template.title} template`} back="/templates">
-        <TemplateForm onSubmit={this.onSubmit} initialValues={template} />
+        <TemplateForm onSubmit={this.onSubmit} isEdit initialValues={template} />
       </FormPageWrapper>
     );
   }
