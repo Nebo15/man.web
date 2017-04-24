@@ -38,11 +38,8 @@ const transformSyntaxToCodemirrorMode = syntax => syntaxToCodemirrorMode[syntax]
 @withStyles(styles)
 @reduxForm({
   form: 'template-form',
-  initialValues: {
-    syntax: 'mustache',
-  },
   validate: reduxFormValidate({
-    title: {
+    name: {
       required: true,
       minLength: 4,
     },
@@ -53,8 +50,12 @@ const transformSyntaxToCodemirrorMode = syntax => syntaxToCodemirrorMode[syntax]
       json: true,
     },
     locals: collectionOf({
-      locale: {
+      code: {
         required: true,
+      },
+      params: {
+        required: true,
+        json: true,
       },
     }),
     labels: arrayOf({
@@ -73,15 +74,36 @@ export default class TemplateForm extends React.Component {
 
   render() {
     const { handleSubmit, onSubmit, onDelete, values, isEdit, submitting } = this.props;
-
+    const placeholderTemplate = {
+      markdown: `# {{l10n.hello}}, {{name}}
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      `,
+      mustache: `<html>
+  <body>
+    <h1>{{l10n.hello}}, {{name}}</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+  </body>
+</html>`,
+    };
     return (
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Line />
         <FormRow>
-          <Field name="title" labelText="Title" component={FieldInput} />
+          <Field
+            name="name"
+            labelText="Title"
+            component={FieldInput}
+            placeholder="eg. Sign up email template"
+          />
         </FormRow>
         <FormRow>
-          <Field name="description" labelText="Description" rows={3} component={FieldTextarea} />
+          <Field
+            name="description"
+            labelText="Description"
+            rows={3}
+            component={FieldTextarea}
+            placeholder="eg. This template will be sent to user's email after success sign up to confirm email"
+          />
         </FormRow>
         <FormRow>
           <Field
@@ -99,7 +121,7 @@ export default class TemplateForm extends React.Component {
           <Field
             labelText="Template"
             name="body"
-            placeholder="Type in template value"
+            placeholder={placeholderTemplate[values.syntax]}
             component={FieldCode}
             mode={transformSyntaxToCodemirrorMode(values.syntax)}
           />

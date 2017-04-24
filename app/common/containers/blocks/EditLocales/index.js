@@ -4,10 +4,20 @@ import { Field } from 'redux-form';
 import withStyles from 'withStyles';
 
 import Icon from 'components/Icon';
-import DropDown, { DropDownControl, DropDownItem } from 'components/DropDown';
+import DropDown, { DropDownItem } from 'components/DropDown';
 import FieldCode from 'components/reduxForm/FieldCode';
 
 import styles from './styles.scss';
+
+const maybeJson = (v) => {
+  let json;
+  try {
+    json = JSON.parse(v);
+    return json;
+  } catch (e) {
+    return v;
+  }
+};
 
 @withStyles(styles)
 export default class EditLocales extends React.Component {
@@ -73,9 +83,18 @@ export default class EditLocales extends React.Component {
           {
             selectedLocaleIndex !== null && <Field
               name={`${fields.name}[${selectedLocaleIndex}].params`}
-              placeholder="Type in locale object"
+              placeholder={`Type in locale object
+
+{
+  "hello": "Hello"
+}
+              `}
               component={FieldCode}
-              mode="javascript"
+              parse={v => v && maybeJson(v)}
+              mode={{
+                name: 'application/json',
+                json: true,
+              }}
             />
           }
         </div>
