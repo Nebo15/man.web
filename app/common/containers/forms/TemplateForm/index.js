@@ -70,13 +70,32 @@ const transformSyntaxToCodemirrorMode = syntax => syntaxToCodemirrorMode[syntax]
   values: getFormValues('template-form')(state),
 }))
 export default class TemplateForm extends React.Component {
-  get isChanged() {
-    const { values = {}, initialValues = {} } = this.props;
-    return JSON.stringify(values) !== JSON.stringify(initialValues);
+  constructor(props) {
+    super(props);
+    this.onSubmit = this.onSubmit.bind(this);
+    this.state = {
+      saved: props.initialValues,
+    };
   }
-
+  onSubmit(values) {
+    return this.props.onSubmit({
+      ...values,
+      locales: values.locales && values.locales.map(i => ({
+        ...i,
+        params: typeof i.params === 'string' ? JSON.parse(i.params) : i.params,
+      })),
+    }).then(() => {
+      this.setState({
+        saved: values,
+      });
+    });
+  }
+  get isChanged() {
+    const { values = {} } = this.props;
+    return JSON.stringify(values) !== JSON.stringify(this.state.saved);
+  }
   render() {
-    const { handleSubmit, onSubmit, onDelete, values, isEdit, submitting } = this.props;
+    const { handleSubmit, onDelete, values, isEdit, submitting } = this.props;
     const placeholderTemplate = {
       markdown: `# {{l10n.hello}}, {{name}}
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
@@ -89,7 +108,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 </html>`,
     };
     return (
-      <Form onSubmit={handleSubmit(onSubmit)}>
+      <Form onSubmit={handleSubmit(this.onSubmit)}>
         <Line />
         <FormRow>
           <Field
@@ -132,9 +151,10 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
         <FormRow><FieldArray name="locales" component={EditLocales} /></FormRow>
         <FormButtons>
           <ButtonsGroup>
-            <Button type="submit" disabled={!this.isChanged}>
-              {isEdit ? 'Save Template' : 'Create Template'}
-            </Button>
+            {isEdit && <Button type="submit" disabled={!this.isChanged}>
+              {submitting ? 'Saving...' : (this.isChanged ? 'Save Template' : 'Saved')}
+            </Button>}
+            {!isEdit && <Button type="submit" disabled={!this.isChanged}>Create Template</Button>}
             {isEdit && <Button id="delete-template-button" type="button" onClick={onDelete} color="red">Delete Template</Button>}
           </ButtonsGroup>
         </FormButtons>
