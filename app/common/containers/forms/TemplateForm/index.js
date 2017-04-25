@@ -39,7 +39,7 @@ const transformSyntaxToCodemirrorMode = syntax => syntaxToCodemirrorMode[syntax]
 @reduxForm({
   form: 'template-form',
   validate: reduxFormValidate({
-    name: {
+    title: {
       required: true,
       minLength: 4,
     },
@@ -48,6 +48,9 @@ const transformSyntaxToCodemirrorMode = syntax => syntaxToCodemirrorMode[syntax]
     },
     validationSchema: {
       json: true,
+    },
+    bodyp: {
+      required: true,
     },
     locals: collectionOf({
       code: {
@@ -90,7 +93,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
         <Line />
         <FormRow>
           <Field
-            name="name"
+            name="title"
             labelText="Title"
             component={FieldInput}
             placeholder="eg. Sign up email template"
