@@ -1,8 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import 'codemirror/mode/handlebars/handlebars.js';
-import 'codemirror/mode/xml/xml.js';
+import 'codemirror/addon/display/placeholder';
+import 'codemirror/mode/handlebars/handlebars';
+import 'codemirror/mode/xml/xml';
+import 'codemirror/mode/markdown/markdown';
+import 'codemirror/mode/javascript/javascript';
 
 import { AppContainer } from 'react-hot-loader';
 

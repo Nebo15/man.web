@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import withStyles from 'nebo15-isomorphic-style-loader/lib/withStyles';
-import { reduxForm, Field, getFormValues } from 'redux-form';
+import { reduxForm, Field, FieldArray, getFormValues } from 'redux-form';
 
 import Form, { FormRow, FormButtons } from 'components/Form';
 
@@ -10,24 +10,34 @@ import FieldInput from 'components/reduxForm/FieldInput';
 import FieldTextarea from 'components/reduxForm/FieldTextarea';
 import FieldCode from 'components/reduxForm/FieldCode';
 
-
 import FieldSelect from 'components/reduxForm/FieldSelect';
 
 import Button, { ButtonsGroup } from 'components/Button';
 import Line from 'components/Line';
 
 import ConfirmFormChanges from 'containers/blocks/ConfirmFormChanges';
+import EditLocales from 'containers/blocks/EditLocales';
 
 import { reduxFormValidate, collectionOf, arrayOf } from 'react-nebo15-validate';
 
 import styles from './styles.scss';
 
+const syntaxToCodemirrorMode = {
+  mustache: {
+    name: 'handlebars',
+    base: 'text/html',
+    htmlMode: true,
+    matchClosing: true,
+    alignCDATA: true,
+  },
+  markdown: 'markdown',
+};
+
+const transformSyntaxToCodemirrorMode = syntax => syntaxToCodemirrorMode[syntax];
+
 @withStyles(styles)
 @reduxForm({
   form: 'template-form',
-  initialValues: {
-    syntax: 'mustache_to_html',
-  },
   validate: reduxFormValidate({
     title: {
       required: true,
@@ -39,9 +49,16 @@ import styles from './styles.scss';
     validationSchema: {
       json: true,
     },
+    bodyp: {
+      required: true,
+    },
     locals: collectionOf({
-      locale: {
+      code: {
         required: true,
+      },
+      params: {
+        required: true,
+        json: true,
       },
     }),
     labels: arrayOf({
@@ -59,16 +76,37 @@ export default class TemplateForm extends React.Component {
   }
 
   render() {
-    const { handleSubmit, onSubmit, onDelete, isEdit, children, submitting } = this.props;
-
+    const { handleSubmit, onSubmit, onDelete, values, isEdit, submitting } = this.props;
+    const placeholderTemplate = {
+      markdown: `# {{l10n.hello}}, {{name}}
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      `,
+      mustache: `<html>
+  <body>
+    <h1>{{l10n.hello}}, {{name}}</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+  </body>
+</html>`,
+    };
     return (
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Line />
         <FormRow>
-          <Field name="title" labelText="Title" component={FieldInput} />
+          <Field
+            name="title"
+            labelText="Title"
+            component={FieldInput}
+            placeholder="eg. Sign up email template"
+          />
         </FormRow>
         <FormRow>
-          <Field name="description" labelText="Description" rows={3} component={FieldTextarea} />
+          <Field
+            name="description"
+            labelText="Description"
+            rows={3}
+            component={FieldTextarea}
+            placeholder="eg. This template will be sent to user's email after success sign up to confirm email"
+          />
         </FormRow>
         <FormRow>
           <Field
@@ -77,7 +115,7 @@ export default class TemplateForm extends React.Component {
             placeholder="Select template syntax"
             component={FieldSelect}
             options={[
-              { name: 'mustache_to_html', title: 'Mustache' },
+              { name: 'mustache', title: 'Mustache' },
               { name: 'markdown', title: 'Markdown' },
             ]}
           />
@@ -86,24 +124,12 @@ export default class TemplateForm extends React.Component {
           <Field
             labelText="Template"
             name="body"
-            placeholder="Type in template value"
+            placeholder={placeholderTemplate[values.syntax]}
             component={FieldCode}
-            mode={{
-              name: 'handlebars',
-              base: 'text/html',
-              htmlMode: true,
-              matchClosing: true,
-              alignCDATA: true,
-            }}
+            mode={transformSyntaxToCodemirrorMode(values.syntax)}
           />
         </FormRow>
-
-        {
-          children && <div className={styles.row}>
-            {children}
-          </div>
-        }
-
+        <FormRow><FieldArray name="locales" component={EditLocales} /></FormRow>
         <FormButtons>
           <ButtonsGroup>
             <Button type="submit" disabled={!this.isChanged}>

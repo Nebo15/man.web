@@ -33,13 +33,15 @@ export const fetchTemplate = (apiId, options) => invoke({
   }, 'templates/FETCH_DETAILS_FAILURE'],
 });
 
-export const createTemplate = (body, options) => invoke({
+export const createTemplate = (template, options) => invoke({
   endpoint: createUrl(`${API_URL}/templates`, options),
   method: 'POST',
   headers: {
     'content-type': 'application/json',
   },
-  body,
+  body: {
+    template,
+  },
   types: ['templates/CREATE_REQUEST', {
     type: 'templates/CREATE_SUCCESS',
     payload: (action, state, res) => res.json().then(
@@ -48,13 +50,15 @@ export const createTemplate = (body, options) => invoke({
   }, 'templates/CREATE_FAILURE'],
 });
 
-export const updateTemplate = (apiId, body, options) => invoke({
-  endpoint: createUrl(`${API_URL}/templates/${apiId}`, options),
+export const updateTemplate = (templateId, template, options) => invoke({
+  endpoint: createUrl(`${API_URL}/templates/${templateId}`, options),
   method: 'PUT',
   headers: {
     'content-type': 'application/json',
   },
-  body,
+  body: {
+    template,
+  },
   types: ['templates/UPDATE_REQUEST', {
     type: 'templates/UPDATE_SUCCESS',
     payload: (action, state, res) => res.json().then(
@@ -63,13 +67,12 @@ export const updateTemplate = (apiId, body, options) => invoke({
   }, 'templates/UPDATE_FAILURE'],
 });
 
-export const deleteTemplate = (apiId, body, options) => invoke({
-  endpoint: createUrl(`${API_URL}/templates/${apiId}`, options),
+export const deleteTemplate = (templateId, options) => invoke({
+  endpoint: createUrl(`${API_URL}/templates/${templateId}`, options),
   method: 'DELETE',
   headers: {
     'content-type': 'application/json',
   },
-  body,
   types: ['templates/DELETE_REQUEST', 'templates/DELETE_SUCCESS', 'templates/DELETE_FAILURE'],
 });
 
