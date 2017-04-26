@@ -1,6 +1,7 @@
 # MAN Web
 
-[![Build Status](https://travis-ci.org/Nebo15/man.web.svg?branch=master)](https://travis-ci.org/Nebo15/man.web)
+[![Greenkeeper badge](https://badges.greenkeeper.io/Nebo15/man.web.svg)](https://greenkeeper.io/)
+[![Build Status](https://travis-ci.com/Nebo15/man.web.svg?branch=master)](https://travis-ci.com/Nebo15/man.web)
 
 MAN UI project.
 
