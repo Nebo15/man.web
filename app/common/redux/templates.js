@@ -33,14 +33,14 @@ export const fetchTemplate = (apiId, options) => invoke({
   }, 'templates/FETCH_DETAILS_FAILURE'],
 });
 
-export const createTemplate = (template, options) => invoke({
+export const createTemplate = (body, options) => invoke({
   endpoint: createUrl(`${API_URL}/templates`, options),
   method: 'POST',
   headers: {
     'content-type': 'application/json',
   },
   body: {
-    template,
+    template: body,
   },
   types: ['templates/CREATE_REQUEST', {
     type: 'templates/CREATE_SUCCESS',
@@ -50,14 +50,14 @@ export const createTemplate = (template, options) => invoke({
   }, 'templates/CREATE_FAILURE'],
 });
 
-export const updateTemplate = (templateId, template, options) => invoke({
+export const updateTemplate = (templateId, body, options) => invoke({
   endpoint: createUrl(`${API_URL}/templates/${templateId}`, options),
   method: 'PUT',
   headers: {
     'content-type': 'application/json',
   },
   body: {
-    template,
+    template: body,
   },
   types: ['templates/UPDATE_REQUEST', {
     type: 'templates/UPDATE_SUCCESS',
