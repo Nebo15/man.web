@@ -44,7 +44,11 @@ export default class AddLanguageForm extends React.Component {
           </Field>
         </FormRow>
         <FormButtons>
-          <Button type="submit" block disabled={submitting || invalid}>Add language</Button>
+          <Button
+            type="submit"
+            block
+            disabled={submitting || invalid}
+          >Add language</Button>
         </FormButtons>
       </Form>
     );

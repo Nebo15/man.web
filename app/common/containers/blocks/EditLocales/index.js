@@ -8,6 +8,7 @@ import withStyles from 'withStyles';
 import Icon from 'components/Icon';
 import FieldCode from 'components/reduxForm/FieldCode';
 import AddLanguageForm from 'containers/forms/AddLanguageForm';
+import { Confirm } from 'components/Popup';
 
 import styles from './styles.scss';
 
@@ -28,8 +29,9 @@ export default class EditLocales extends React.Component {
     this.onAddLocale = this.onAddLocale.bind(this);
 
     this.state = {
-      selectedLocaleIndex: props.fields.length ? 0 : null,
+      selectedLocal: props.fields.length ? 0 : null,
       dropdownOpened: false,
+      toDelete: null,
     };
   }
   onAddLocale(code) {
@@ -38,18 +40,31 @@ export default class EditLocales extends React.Component {
       params: {},
     });
     this.closeDropdown();
-    this.selectLocale(code.code, this.props.fields.length);
+    this.selectLocale(this.props.fields.length);
     return false;
   }
-  selectLocale(selectedLocale, selectedLocaleIndex) {
+  selectLocale(index) {
     this.setState({
-      selectedLocaleIndex,
+      selectedLocal: index,
     });
   }
-  deleteLocale(locale, index) {
-    this.props.fields.remove(index);
-    const newIndex = (index - 1);
-    this.selectLocale(null, newIndex === -1 ? 0 : newIndex);
+  showDeleteConfirm(index) {
+    this.setState({
+      toDelete: index,
+    });
+  }
+  deleteLocale(index) {
+    this.setState({
+      toDelete: null,
+    }, () => {
+      this.props.fields.remove(index);
+      const newIndex = (index - 1);
+      if (this.props.fields.length <= 1) {
+        this.selectLocale(null);
+      } else {
+        this.selectLocale(newIndex === -1 ? 0 : newIndex);
+      }
+    });
   }
   openDropdown() {
     this.setState({
@@ -66,7 +81,7 @@ export default class EditLocales extends React.Component {
       dropdownOpened: !this.state.dropdownOpened,
     });
   }
-  renderSelect(locales) {
+  renderSelect(locales = []) {
     const codes = locales.map(i => i.code);
     return (
       <div className={styles.select}>
@@ -75,17 +90,17 @@ export default class EditLocales extends React.Component {
             <li
               className={classnames(
                 styles.select__item,
-                codes[this.state.selectedLocaleIndex] === code && styles.active
+                codes[this.state.selectedLocal] === code && styles.active
               )}
               key={code}
             >
               <span
                 className={styles.select__item__text}
-                onClick={() => this.selectLocale(code, index)}
+                onClick={() => this.selectLocale(index)}
               >{code}</span>
               <span
                 className={styles.select__item__close}
-                onClick={() => this.deleteLocale(code, index)}
+                onClick={() => this.showDeleteConfirm(index)}
               >&#10006;</span>
             </li>
           )}
@@ -104,7 +119,9 @@ export default class EditLocales extends React.Component {
             <span className={styles.select__add__icon}><Icon name="add" /></span>
           </div>
           <div className={styles.select__add__dropdown}>
-            <LanguageDropdown locales={codes} onAdd={this.onAddLocale} />
+            { this.state.dropdownOpened &&
+              <LanguageDropdown locales={codes} onAdd={this.onAddLocale} />
+            }
           </div>
         </div>
       </div>
@@ -112,15 +129,15 @@ export default class EditLocales extends React.Component {
   }
   render() {
     const { fields } = this.props;
-    const { selectedLocaleIndex } = this.state;
-    const values = fields.getAll();
+    const { selectedLocal } = this.state;
+    const values = fields.getAll() || [];
     return (
       <div className={styles.main}>
         {this.renderSelect(values)}
         <div className={styles.editor}>
           {
-            selectedLocaleIndex !== null && <Field
-              name={`${fields.name}[${selectedLocaleIndex}].params`}
+            selectedLocal !== null && <Field
+              name={`${fields.name}[${selectedLocal}].params`}
               placeholder={`Type in locale object
 
 {
@@ -134,7 +151,26 @@ export default class EditLocales extends React.Component {
               }}
             />
           }
+          { values.length === 0 && (
+            <div
+              className={styles.editor__placeholder}
+              onClick={this.openDropdown}
+            >Add language</div>
+          )}
         </div>
+        {
+          this.state.toDelete !== null && (
+            <Confirm
+              title={`Are you sure want to delete ${values[this.state.toDelete].code} locale`}
+              active={this.state.toDelete !== null}
+              theme="error"
+              confirm="Ok"
+              id="confirm-leave"
+              onCancel={() => this.setState({ toDelete: null })}
+              onConfirm={() => this.deleteLocale(this.state.toDelete)}
+            >Are you sure want to leave this localization?</Confirm>
+          )
+        }
       </div>
     );
   }

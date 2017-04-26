@@ -170,3 +170,16 @@
     }
   }
 }
+
+.editor {
+  &__placeholder {
+    margin-top: -1px;
+    background: #f7f7f7;
+    text-align: center;
+    padding: 20px;
+    box-shadow: inset 0 0 0 1px #dedede;
+    font-size: 13px;
+    color: #666;
+    cursor: pointer;
+  }
+}

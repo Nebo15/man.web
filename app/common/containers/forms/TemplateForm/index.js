@@ -49,7 +49,7 @@ const transformSyntaxToCodemirrorMode = syntax => syntaxToCodemirrorMode[syntax]
     validationSchema: {
       json: true,
     },
-    bodyp: {
+    body: {
       required: true,
     },
     locals: collectionOf({
