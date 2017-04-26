@@ -8,7 +8,7 @@ export default class NotFoundPage extends React.Component {
     return (
       <div id="not-found-page">
         <H1>Page Not Found</H1>
-        <p>Requested page not found. Maybe you are looking for <Button theme="link" to="/apis" >list of APIs</Button>.</p>
+        <p>Requested page not found. Maybe you are looking for <Button theme="link" to="/templates" >list of templates</Button>.</p>
       </div>
     );
   }

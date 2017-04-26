@@ -5,7 +5,7 @@
 
 MAN UI project.
 
-Api: https://github.com/Nebo15/man.api
+Api: https://github.com/Nebo15/man.api    
 Dev: http://man-web.herokuapp.com/
 
 ## Technologies

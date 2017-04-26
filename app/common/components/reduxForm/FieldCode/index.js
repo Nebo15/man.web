@@ -14,7 +14,7 @@ import FieldInput from '../FieldInput';
 @withStyles(styles)
 export default class FieldCode extends React.Component {
   render() {
-    const { input, ...rest } = this.props;
+    const { input, mode, ...rest } = this.props;
 
     return (
       <FieldInput
@@ -26,7 +26,7 @@ export default class FieldCode extends React.Component {
           onChange: value => value !== input.value && input.onChange(value),
         }}
         options={{
-          mode: {
+          mode: mode || {
             name: 'application/json',
             json: true,
           },

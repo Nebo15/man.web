@@ -59,6 +59,7 @@ $errored: #ff1f44;
   font-size: 14px;
   width: 100%;
   background-color: transparent;
+  border: none;
 
   &::placeholder {
     color: rgba(61, 61, 61, 0.5);
@@ -117,4 +118,5 @@ textarea.input {
   background-color: $errored;
   font-size: 10px;
   line-height: 1.4;
+  z-index: 1;
 }

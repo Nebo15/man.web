@@ -27,8 +27,8 @@ export default class Nav extends React.Component {
     return (
       <nav className={classnames(styles.nav, isOpen && styles.open)}>
         <ul>
-          <NavItem to="apis" activeClassName={styles.active}>
-            <Link id="apis-nav" to="/templates">Templates</Link>
+          <NavItem to="templates" activeClassName={styles.active}>
+            <Link id="templates-nav" to="/templates">Templates</Link>
           </NavItem>
         </ul>
         <ul className={styles.down}>

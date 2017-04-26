@@ -1,5 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+
+import 'codemirror/addon/display/placeholder';
+import 'codemirror/mode/handlebars/handlebars';
+import 'codemirror/mode/xml/xml';
+import 'codemirror/mode/markdown/markdown';
+import 'codemirror/mode/javascript/javascript';
+
 import { AppContainer } from 'react-hot-loader';
 
 import CookieDough from 'cookie-dough';
