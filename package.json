@@ -142,7 +142,7 @@
     "chai": "3.5.0",
     "chromedriver": "2.25.1",
     "concurrently": "2.2.0",
-    "coveralls": "2.13.0",
+    "coveralls": "2.13.1",
     "enzyme": "2.8.0",
     "eslint": "3.6.0",
     "eslint-config-airbnb": "11.2.0",
