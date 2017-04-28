@@ -9,7 +9,7 @@
       "required": true,
       "value": "true"
     },
-    "API_HOST": {
+    "API_ENDPOINT": {
       "description": "Mán API host",
       "required": true,
       "value": "https://man-api.herokuapp.com"
