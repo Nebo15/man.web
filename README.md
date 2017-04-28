@@ -1,5 +1,8 @@
 # Mán Dashboard
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/Nebo15/man.web.svg)](https://greenkeeper.io/)
+[![Build Status](https://travis-ci.org/Nebo15/man.web.svg?branch=master)](https://travis-ci.org/Nebo15/man.web)
+
 [![Build history](https://buildstats.info/travisci/chart/Nebo15/man.web)](https://travis-ci.org/Nebo15/man.web)
 
 API: https://github.com/Nebo15/man.api    
