@@ -19,14 +19,14 @@ export default class TemplateCreatePage extends React.Component {
     const initialValues = {
       name: null,
       syntax: 'mustache',
-      locales: [
-        {
-          code: 'en_US',
-          params: {
-            Hello: 'Hello',
-          },
-        },
-      ],
+      // locales: [
+      //   {
+      //     code: 'en_US',
+      //     params: {
+      //       Hello: 'Hello',
+      //     },
+      //   },
+      // ],
     };
 
     return (
