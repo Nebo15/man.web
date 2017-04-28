@@ -1,7 +1,6 @@
 # Mán Dashboard
 
 [![Build history](https://buildstats.info/travisci/chart/Nebo15/man.web)](https://travis-ci.org/Nebo15/man.web)
-[![Build Status](https://travis-ci.org/Nebo15/man.web.svg?branch=master)](https://travis-ci.org/Nebo15/man.web)
 
 API: https://github.com/Nebo15/man.api    
 Demo: http://man-web.herokuapp.com/
