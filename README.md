@@ -1,12 +1,37 @@
-# MAN Web
+# Mán Dashboard
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/Nebo15/man.web.svg)](https://greenkeeper.io/)
 [![Build Status](https://travis-ci.org/Nebo15/man.web.svg?branch=master)](https://travis-ci.org/Nebo15/man.web)
 
-MAN UI project.
+[![Build history](https://buildstats.info/travisci/chart/Nebo15/man.web)](https://travis-ci.org/Nebo15/man.web)
 
-Api: https://github.com/Nebo15/man.api    
-Dev: http://man-web.herokuapp.com/
+API: https://github.com/Nebo15/man.api    
+Demo: http://man-web.herokuapp.com/
+
+## Installation
+
+### Heroku One-Click Deployment
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/nebo15/man.web)
+
+### Docker
+
+Dashboard can be deployed as a single container from [nebo15/man.web](https://hub.docker.com/r/nebo15/man.web/) Docker Hub.
+
+## Configurations
+
+Application supports these environment variables:
+
+| Environment Variable  | Default Value           | Description |
+| --------------------- | ----------------------- | ----------- |
+| `PORT`                | `8080`                  | Node.js server port. |
+| `API_ENDPOINT`            | `https://man-api.herokuapp.com` | Mán API endpoint. |
+| `SITEMAP_HOSTNAME`    | `http://localhost:8080` | URL will be used in sitemap generated urls |
+| `LANG_COOKIE_NAME`    | `lang`                  | Name of the cookie, where storing language variable |
+
+## Docs
+
+Dashboard works on top of [Man management API](http://docs.man2.apiary.io).
 
 ## Technologies
 

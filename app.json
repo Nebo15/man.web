@@ -1,11 +1,26 @@
 {
   "name": "man.web",
+  "logo": "https://raw.githubusercontent.com/Nebo15/man.web/master/assets/images/logo.png",
   "scripts": {
   },
   "env": {
     "PREBUILD": {
-      "description": "RUN postinstall script",
+      "description": "RUN postinstall script. MUST be `true`",
+      "required": true,
       "value": "true"
+    },
+    "API_ENDPOINT": {
+      "description": "Mán API host",
+      "required": true,
+      "value": "https://man-api.herokuapp.com"
+    },
+    "SITEMAP_HOSTNAME": {
+      "description": "SITEMAP_HOSTNAME will be used as hostname in sitemap URLs",
+      "value": ""
+    },
+    "LANG_COOKIE_NAME": {
+      "description": "Name of the cookie, where storing language variable",
+      "value": "lang"
     }
   },
   "formation": {
