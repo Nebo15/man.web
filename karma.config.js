@@ -1,4 +1,4 @@
-
+const webpack = require('webpack');
 const karmaWebpack = require('karma-webpack');
 const karmaMocha = require('karma-mocha');
 const karmaChai = require('karma-chai');
@@ -28,6 +28,11 @@ const webpackTestConfig = webpackMerge(
       'react/lib/ExecutionEnvironment': true,
       'react/lib/ReactContext': true,
     },
+    plugins: [
+      new webpack.DefinePlugin({
+        __CLIENT__: false,
+      }),
+    ],
   }
 );
 
