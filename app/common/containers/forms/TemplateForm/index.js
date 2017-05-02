@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import getFn from 'lodash/get';
 
 import withStyles from 'nebo15-isomorphic-style-loader/lib/withStyles';
 import { reduxForm, Field, FieldArray, getFormValues } from 'redux-form';
@@ -11,6 +12,7 @@ import FieldTextarea from 'components/reduxForm/FieldTextarea';
 import FieldCode from 'components/reduxForm/FieldCode';
 
 import FieldSelect from 'components/reduxForm/FieldSelect';
+import TemplatePreview from 'components/TemplatePreview';
 
 import Button, { ButtonsGroup } from 'components/Button';
 import Line from 'components/Line';
@@ -34,6 +36,14 @@ const syntaxToCodemirrorMode = {
 };
 
 const transformSyntaxToCodemirrorMode = syntax => syntaxToCodemirrorMode[syntax];
+
+const maybeJson = (s) => {
+  try {
+    return JSON.parse(s);
+  } catch (e) {
+    return null;
+  }
+};
 
 @withStyles(styles)
 @reduxForm({
@@ -66,28 +76,38 @@ const transformSyntaxToCodemirrorMode = syntax => syntaxToCodemirrorMode[syntax]
     }),
   }),
 })
-@connect(state => ({
-  values: getFormValues('template-form')(state),
-}))
+@connect((state) => {
+  const values = getFormValues('template-form')(state);
+  return {
+    values: {
+      ...values,
+      locales: (values.locales || []).map(i => ({
+        ...i,
+        params: typeof i.params === 'object' ? i.params : maybeJson(i.params),
+      })),
+    },
+  };
+})
 export default class TemplateForm extends React.Component {
   constructor(props) {
     super(props);
     this.onSubmit = this.onSubmit.bind(this);
+    this.onChangeLocale = this.onChangeLocale.bind(this);
     this.state = {
       saved: props.initialValues,
+      locale: getFn(props.initialValues, 'locales[0].code', null),
     };
   }
-  onSubmit(values) {
-    return this.props.onSubmit({
-      ...values,
-      locales: values.locales && values.locales.map(i => ({
-        ...i,
-        params: typeof i.params === 'string' ? JSON.parse(i.params) : i.params,
-      })),
-    }).then(() => {
+  onSubmit() {
+    return this.props.onSubmit(this.props.values).then(() => {
       this.setState({
-        saved: values,
+        saved: this.props.values,
       });
+    });
+  }
+  onChangeLocale(locale) {
+    this.setState({
+      locale,
     });
   }
   get isChanged() {
@@ -148,7 +168,16 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
             mode={transformSyntaxToCodemirrorMode(values.syntax)}
           />
         </FormRow>
-        <FormRow><FieldArray name="locales" component={EditLocales} /></FormRow>
+        <FormRow><FieldArray
+          name="locales"
+          component={EditLocales}
+          locale={this.state.locale}
+          onChangeLocale={this.onChangeLocale}
+        /></FormRow>
+
+        <FormRow>
+          <TemplatePreview template={values} locale={this.state.locale} />
+        </FormRow>
         <FormButtons>
           <ButtonsGroup>
             {isEdit && <Button type="submit" disabled={!this.isChanged}>
