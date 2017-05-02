@@ -16,6 +16,7 @@
     },
     "SITEMAP_HOSTNAME": {
       "description": "SITEMAP_HOSTNAME will be used as hostname in sitemap URLs",
+      "required": false,
       "value": ""
     },
     "LANG_COOKIE_NAME": {
