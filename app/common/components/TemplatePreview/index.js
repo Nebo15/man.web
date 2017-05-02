@@ -78,29 +78,36 @@ export default class TemplatePreview extends React.Component {
   get isVariablesAvailable() {
     return this.props.template.syntax === 'mustache';
   }
-  render() {
-    const { template, locale } = this.props;
+  get html() {
     let html = '';
+    const { template, locale } = this.props;
+    if (!template.body) return html;
 
     try {
       switch (template.syntax) {
         case 'mustache':
-          html = mustache.render(template.body, {
+          html = mustache.render(template.body || '', {
             l10n: chain(template.locales).find({ code: locale }).get('params').value(),
             ...this.testData,
           });
           break;
         case 'markdown':
-          html = markdown.toHTML(template.body);
+          html = markdown.toHTML(template.body || '');
           break;
         default: {
-          console.warn('Unspecific template syntax type', template.syntax); // eslint-disable-line
+          if (__DEV__) {
+            console.warn('Unspecific template syntax type', template.syntax); // eslint-disable-line
+          }
         }
       }
     } catch (e) {
-      console.warn('error while render template', e); //eslint-disable-line
+      if (__DEV__) {
+        console.warn('error while render template', e); //eslint-disable-line
+      }
     }
-
+    return html;
+  }
+  render() {
     return (<FullScreen active={this.state.fullScreen}>
       <div className={classnames(styles.wrap, this.state.fullScreen && styles['wrap--fullscreen'])}>
         <div className={styles.header}>
@@ -133,7 +140,7 @@ export default class TemplatePreview extends React.Component {
         <div className={styles.main}>
           <IFrame
             className={styles.preview}
-            content={html}
+            content={this.html}
           />
           { this.state.openTestVariables && this.isVariablesAvailable &&
             <div
