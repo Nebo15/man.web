@@ -176,7 +176,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
         /></FormRow>
 
         <FormRow>
-          <TemplatePreview template={values} locale={this.state.locale} />
+          <TemplatePreview template={values} locale={this.state.locale} fullScreen />
         </FormRow>
         <FormButtons>
           <ButtonsGroup>
