@@ -61,9 +61,7 @@ export const Component = ({
 
   return (<span>
     <label className={styles['label-wrapper']}>
-      <div className={styles['label-text']}>
-        { labelText }
-      </div>
+      { labelText && <div className={styles['label-text']}>{ labelText }</div> }
       <span
         className={classnames(
           styles['group-input'],

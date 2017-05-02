@@ -34,7 +34,7 @@ export default class TemplatePreview extends React.Component {
     });
   }
   render() {
-    const { template, fullScreen, locale } = this.props;
+    const { template, locale } = this.props;
     let html = '';
     const variables = {
       l10n: chain(template.locales).find({ code: locale }).get('params').value(),
@@ -57,7 +57,7 @@ export default class TemplatePreview extends React.Component {
     }
 
     return (<FullScreen active={this.state.fullScreen}>
-      <div className={classnames(styles.wrap, fullScreen && styles['wrap--fullscreen'])}>
+      <div className={classnames(styles.wrap, this.state.fullScreen && styles['wrap--fullscreen'])}>
         <div className={styles.header}>
           <div className={classnames(styles.header__cell, styles['header__cell--icon'])}>
             <Icon name="eye" />

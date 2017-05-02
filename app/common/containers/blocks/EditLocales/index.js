@@ -71,11 +71,11 @@ export default class EditLocales extends React.Component {
       const deleteLocaleObj = findFn(locales, { code: locale });
       const deleteLocaleIdx = locales.indexOf(deleteLocaleObj);
       this.props.fields.remove(deleteLocaleIdx);
-      if (this.props.locale !== locale) return;
-      if (this.props.fields.length <= 1) {
-        this.selectLocale(null);
-      }
-      this.selectLocale(locales[Math.max(deleteLocaleIdx - 1, 0)].code);
+      const newLocales = locales.filter(i => i.code !== locale);
+
+      if (this.props.locale !== locale) return null;
+      if (newLocales.length === 0) return this.selectLocale(null);
+      return this.selectLocale(newLocales[Math.max(deleteLocaleIdx - 1, 0)].code);
     });
   }
   openDropdown() {
