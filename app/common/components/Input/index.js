@@ -28,6 +28,7 @@ export const Component = ({
   error,
   placeholder,
   name,
+  fullHeight,
   onChange,
   onBlur,
   onFocus,
@@ -59,7 +60,11 @@ export const Component = ({
     onFocus,
   };
 
-  return (<span>
+  return (<span
+    className={classnames(
+      fullHeight && styles.fullHeight
+    )}
+  >
     <label className={styles['label-wrapper']}>
       { labelText && <div className={styles['label-text']}>{ labelText }</div> }
       <span

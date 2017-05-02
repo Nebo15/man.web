@@ -168,12 +168,14 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
             mode={transformSyntaxToCodemirrorMode(values.syntax)}
           />
         </FormRow>
-        <FormRow><FieldArray
-          name="locales"
-          component={EditLocales}
-          locale={this.state.locale}
-          onChangeLocale={this.onChangeLocale}
-        /></FormRow>
+        { values.syntax === 'mustache' && (
+          <FormRow><FieldArray
+            name="locales"
+            component={EditLocales}
+            locale={this.state.locale}
+            onChangeLocale={this.onChangeLocale}
+          /></FormRow>
+        )}
 
         <FormRow>
           <TemplatePreview template={values} locale={this.state.locale} />

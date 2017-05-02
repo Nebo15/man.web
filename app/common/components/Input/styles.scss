@@ -11,6 +11,13 @@ $errored: #ff1f44;
   width: 100%;
 }
 
+.fullHeight {
+  .label-wrapper,
+  .group-input {
+    height: 100%;
+  }
+}
+
 .group-input {
   position: relative;
   display: flex;

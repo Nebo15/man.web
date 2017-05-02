@@ -10,8 +10,16 @@ import { markdown } from 'markdown';
 import Icon from 'components/Icon';
 import IFrame from 'components/IFrame';
 import FullScreen from 'components/FullScreen';
+import FieldCode from 'components/reduxForm/FieldCode';
 
 import styles from './styles.scss';
+
+
+// NOTE: simple solution. Get only root variable names
+const getVariableNames = template =>
+  mustache.parse(template)
+  .filter(v => ['name', '#', '&'].indexOf(v[0]) > -1)
+  .map(v => v[1]);
 
 @withStyles(styles)
 export default class TemplatePreview extends React.Component {
@@ -19,9 +27,31 @@ export default class TemplatePreview extends React.Component {
     super(props);
     this.expand = this.expand.bind(this);
     this.reduce = this.reduce.bind(this);
+    this.toggleTestVariables = this.toggleTestVariables.bind(this);
+    this.onChangeTestVariables = this.onChangeTestVariables.bind(this);
+
+    let testData;
+    if (this.props.template.syntax === 'mustache') {
+      const testVariables = getVariableNames(props.template.body);
+      const filteredLocalization = testVariables
+        .filter(key => !key.match(/^l10n/g))
+        .reduce((prev, key) => ({
+          ...prev,
+          [key]: '',
+        }), {});
+      testData = JSON.stringify(filteredLocalization, null, 2);
+    }
+
     this.state = {
       fullScreen: false,
+      openTestVariables: false,
+      testData,
     };
+  }
+  onChangeTestVariables(json) {
+    this.setState({
+      testData: json,
+    });
   }
   expand() {
     this.setState({
@@ -33,17 +63,32 @@ export default class TemplatePreview extends React.Component {
       fullScreen: false,
     });
   }
+  toggleTestVariables() {
+    this.setState({
+      openTestVariables: !this.state.openTestVariables,
+    });
+  }
+  get testData() {
+    try {
+      return JSON.parse(this.state.testData);
+    } catch (e) {
+      return {};
+    }
+  }
+  get isVariablesAvailable() {
+    return this.props.template.syntax === 'mustache';
+  }
   render() {
     const { template, locale } = this.props;
     let html = '';
-    const variables = {
-      l10n: chain(template.locales).find({ code: locale }).get('params').value(),
-    };
 
     try {
       switch (template.syntax) {
         case 'mustache':
-          html = mustache.render(template.body, variables);
+          html = mustache.render(template.body, {
+            l10n: chain(template.locales).find({ code: locale }).get('params').value(),
+            ...this.testData,
+          });
           break;
         case 'markdown':
           html = markdown.toHTML(template.body);
@@ -62,8 +107,19 @@ export default class TemplatePreview extends React.Component {
           <div className={classnames(styles.header__cell, styles['header__cell--icon'])}>
             <Icon name="eye" />
           </div>
-          <div className={styles.header__cell}>Preview</div>
-          <div
+          <div className={classnames(styles.header__cell, styles['header__cell--title'])}>Preview</div>
+          {
+            this.isVariablesAvailable && (
+              <a
+                className={classnames(
+                  styles.header__cell,
+                  this.state.openTestVariables && styles['header__cell--active'],
+                )}
+                onClick={this.toggleTestVariables}
+              >Edit test variables</a>
+            )
+          }
+          <a
             className={classnames(
               styles.header__cell,
               styles['header__cell--icon'],
@@ -72,12 +128,38 @@ export default class TemplatePreview extends React.Component {
             onClick={this.state.fullScreen ? this.reduce : this.expand}
           >
             <Icon name={this.state.fullScreen ? 'arrows-reduce' : 'arrows-expand'} />
-          </div>
+          </a>
         </div>
-        <IFrame
-          className={styles.preview}
-          content={html}
-        />
+        <div className={styles.main}>
+          <IFrame
+            className={styles.preview}
+            content={html}
+          />
+          { this.state.openTestVariables && this.isVariablesAvailable &&
+            <div
+              className={styles.sidebar}
+            >
+              <FieldCode
+                input={{
+                  onChange: this.onChangeTestVariables,
+                  value: this.state.testData,
+                }}
+                meta={{}}
+                fullHeight
+                options={{
+                  mode: {
+                    name: 'application/json',
+                    json: true,
+                  },
+                  smartIndent: false,
+                  lineNumbers: true,
+                  gutters: [],
+                  lint: false,
+                }}
+              />
+            </div>
+          }
+        </div>
       </div>
     </FullScreen>);
   }
