@@ -91,16 +91,20 @@
 }
 
 .sidebar {
+  position: relative;
   flex: 0 0 auto;
-  width: 242px;
+  width: 241px;
   background: #fff;
-  margin-top: -1px;
-  margin-right: -1px;
   right: 0;
   bottom: 0;
-  top: 49px;
+  box-shadow: 0 0 0 1px #dedede;
 
   :global(.CodeMirror) {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
     height: 100%;
   }
 }

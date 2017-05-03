@@ -147,6 +147,7 @@ export default class TemplatePreview extends React.Component {
               className={styles.sidebar}
             >
               <FieldCode
+                theme="float"
                 input={{
                   onChange: this.onChangeTestVariables,
                   value: this.state.testData,

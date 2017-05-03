@@ -54,9 +54,20 @@ $errored: #ff1f44;
   &.disabled {
     border-color: $disabled;
   }
+}
 
-  &.theme-light {
+.theme-light {
+  .group-input {
     border-color: #dadcde;
+  }
+}
+
+.theme-float {
+  border: none;
+
+  .group-input,
+  .label-wrapper {
+    position: static;
   }
 }
 

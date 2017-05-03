@@ -62,7 +62,8 @@ export const Component = ({
 
   return (<span
     className={classnames(
-      fullHeight && styles.fullHeight
+      fullHeight && styles.fullHeight,
+      theme && styles[`theme-${theme}`]
     )}
   >
     <label className={styles['label-wrapper']}>
@@ -70,7 +71,6 @@ export const Component = ({
       <span
         className={classnames(
           styles['group-input'],
-          styles[`theme-${theme}`],
           error && styles.error,
           active && styles.active,
           disabled && styles.disabled
@@ -95,7 +95,7 @@ export const Component = ({
 };
 
 Component.propTypes = {
-  theme: PropTypes.oneOf(['light']),
+  theme: PropTypes.oneOf(['light', 'float']),
 };
 
 export default withStyles(styles)(Component);
