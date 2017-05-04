@@ -13,6 +13,9 @@ export const icons = [
   'doc',
   'trash',
   'nebo15',
+  'eye',
+  'arrows-expand',
+  'arrows-reduce',
 ];
 
 const Icon = ({ name }) => React.createElement('i', {

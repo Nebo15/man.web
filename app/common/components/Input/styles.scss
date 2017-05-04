@@ -11,6 +11,13 @@ $errored: #ff1f44;
   width: 100%;
 }
 
+.fullHeight {
+  .label-wrapper,
+  .group-input {
+    height: 100%;
+  }
+}
+
 .group-input {
   position: relative;
   display: flex;
@@ -47,9 +54,20 @@ $errored: #ff1f44;
   &.disabled {
     border-color: $disabled;
   }
+}
 
-  &.theme-light {
+.theme-light {
+  .group-input {
     border-color: #dadcde;
+  }
+}
+
+.theme-float {
+  border: none;
+
+  .group-input,
+  .label-wrapper {
+    position: static;
   }
 }
 
