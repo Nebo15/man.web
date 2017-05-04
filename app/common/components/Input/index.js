@@ -28,6 +28,7 @@ export const Component = ({
   error,
   placeholder,
   name,
+  fullHeight,
   onChange,
   onBlur,
   onFocus,
@@ -59,15 +60,17 @@ export const Component = ({
     onFocus,
   };
 
-  return (<span>
+  return (<span
+    className={classnames(
+      fullHeight && styles.fullHeight,
+      theme && styles[`theme-${theme}`]
+    )}
+  >
     <label className={styles['label-wrapper']}>
-      <div className={styles['label-text']}>
-        { labelText }
-      </div>
+      { labelText && <div className={styles['label-text']}>{ labelText }</div> }
       <span
         className={classnames(
           styles['group-input'],
-          styles[`theme-${theme}`],
           error && styles.error,
           active && styles.active,
           disabled && styles.disabled
@@ -92,7 +95,7 @@ export const Component = ({
 };
 
 Component.propTypes = {
-  theme: PropTypes.oneOf(['light']),
+  theme: PropTypes.oneOf(['light', 'float']),
 };
 
 export default withStyles(styles)(Component);

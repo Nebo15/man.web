@@ -1,5 +1,8 @@
 import React from 'react';
 import classnames from 'classnames';
+import findFn from 'lodash/find';
+import getFn from 'lodash/get';
+import { compose } from 'helpers/functions';
 
 import { Field } from 'redux-form';
 
@@ -29,41 +32,50 @@ export default class EditLocales extends React.Component {
     this.onAddLocale = this.onAddLocale.bind(this);
 
     this.state = {
-      selectedLocal: props.fields.length ? 0 : null,
       dropdownOpened: false,
       toDelete: null,
     };
   }
-  onAddLocale(code) {
+  onAddLocale({ code }) {
     this.props.fields.push({
-      code: code.code,
-      params: {},
+      code,
+      params: compose(this.clearObject, getFn)(this.currentLocale, 'params', {}),
     });
     this.closeDropdown();
-    this.selectLocale(this.props.fields.length);
+    this.selectLocale(code);
     return false;
   }
-  selectLocale(index) {
-    this.setState({
-      selectedLocal: index,
-    });
+  get currentLocale() {
+    return findFn(this.props.fields.getAll(), { code: this.props.locale }, null);
+  }
+  clearObject(object) {
+    if (typeof object !== 'object') return {};
+    return Object.keys(object).reduce((prev, key) => ({
+      ...prev,
+      [key]: '',
+    }), {});
+  }
+  selectLocale(locale) {
+    this.props.onChangeLocale(locale);
   }
   showDeleteConfirm(index) {
     this.setState({
       toDelete: index,
     });
   }
-  deleteLocale(index) {
+  deleteLocale(locale) {
     this.setState({
       toDelete: null,
     }, () => {
-      this.props.fields.remove(index);
-      const newIndex = (index - 1);
-      if (this.props.fields.length <= 1) {
-        this.selectLocale(null);
-      } else {
-        this.selectLocale(newIndex === -1 ? 0 : newIndex);
-      }
+      const locales = this.props.fields.getAll();
+      const deleteLocaleObj = findFn(locales, { code: locale });
+      const deleteLocaleIdx = locales.indexOf(deleteLocaleObj);
+      this.props.fields.remove(deleteLocaleIdx);
+      const newLocales = locales.filter(i => i.code !== locale);
+
+      if (this.props.locale !== locale) return null;
+      if (newLocales.length === 0) return this.selectLocale(null);
+      return this.selectLocale(newLocales[Math.max(deleteLocaleIdx - 1, 0)].code);
     });
   }
   openDropdown() {
@@ -86,21 +98,21 @@ export default class EditLocales extends React.Component {
     return (
       <div className={styles.select}>
         <ul className={styles.select__list}>
-          { codes.map((code, index) =>
+          { codes.map(code =>
             <li
               className={classnames(
                 styles.select__item,
-                codes[this.state.selectedLocal] === code && styles.active
+                this.props.locale === code && styles.active
               )}
               key={code}
             >
               <span
                 className={styles.select__item__text}
-                onClick={() => this.selectLocale(index)}
+                onClick={() => this.selectLocale(code)}
               >{code}</span>
               <span
                 className={styles.select__item__close}
-                onClick={() => this.showDeleteConfirm(index)}
+                onClick={() => this.showDeleteConfirm(code)}
               >&#10006;</span>
             </li>
           )}
@@ -128,16 +140,18 @@ export default class EditLocales extends React.Component {
     );
   }
   render() {
-    const { fields } = this.props;
-    const { selectedLocal } = this.state;
+    const { fields, locale } = this.props;
     const values = fields.getAll() || [];
+    const selected = findFn(values, { code: locale });
+    const indexOfSelectedLocal = values.indexOf(selected);
+
     return (
       <div className={styles.main}>
         {this.renderSelect(values)}
         <div className={styles.editor}>
           {
-            selectedLocal !== null && <Field
-              name={`${fields.name}[${selectedLocal}].params`}
+            indexOfSelectedLocal !== -1 && <Field
+              name={`${fields.name}[${indexOfSelectedLocal}].params`}
               placeholder={`Type in locale object
 
 {
@@ -161,7 +175,7 @@ export default class EditLocales extends React.Component {
         {
           this.state.toDelete !== null && (
             <Confirm
-              title={`Are you sure want to delete ${values[this.state.toDelete].code} locale`}
+              title={`Are you sure want to delete ${this.state.toDelete} locale`}
               active={this.state.toDelete !== null}
               theme="error"
               confirm="Ok"
