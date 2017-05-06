@@ -132,7 +132,7 @@
     "svg-inline-loader": "0.7.0",
     "svg-inline-react": "1.0.2",
     "webfonts-loader": "1.0.2",
-    "webpack": "2.5.0",
+    "webpack": "2.5.1",
     "webpack-merge": "4.1.0"
   },
   "devDependencies": {
