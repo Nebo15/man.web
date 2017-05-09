@@ -5,8 +5,14 @@
 
 [![Build history](https://buildstats.info/travisci/chart/Nebo15/man.web)](https://travis-ci.org/Nebo15/man.web)
 
-API: https://github.com/Nebo15/man.api    
-Demo: http://man-web.herokuapp.com/
+API: https://github.com/Nebo15/man.api
+
+
+## Demo
+
+![UI Demo](https://github.com/Nebo15/man.web/raw/master/docs/images/ui-animated.gif)
+
+Try it here: http://man-web.herokuapp.com/
 
 ## Installation
 
