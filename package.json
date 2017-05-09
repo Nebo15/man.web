@@ -123,7 +123,7 @@
     "redux": "3.5.2",
     "redux-actions": "0.12.0",
     "redux-api-middleware": "1.0.3",
-    "redux-form": "6.4.3",
+    "redux-form": "6.7.0",
     "redux-freeze": "0.1.4",
     "redux-multi": "0.1.12",
     "redux-promise": "0.5.3",
