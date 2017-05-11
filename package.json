@@ -107,7 +107,7 @@
     "react-dom": "15.2.1",
     "react-helmet": "4.0.0",
     "react-hot-loader": "3.0.0-beta.6",
-    "react-i18next": "3.1.1",
+    "react-i18next": "3.1.2",
     "react-lite": "0.15.35",
     "react-nebo15-mask": "1.0.7",
     "react-nebo15-validate": "0.1.10",
