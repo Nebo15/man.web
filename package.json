@@ -50,7 +50,7 @@
   "license": "MIT",
   "dependencies": {
     "assets-webpack-plugin": "3.4.0",
-    "autoprefixer": "7.1.0",
+    "autoprefixer": "7.1.1",
     "babel": "6.23.0",
     "babel-core": "6.24.0",
     "babel-loader": "6.4.1",
