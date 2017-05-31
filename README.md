@@ -5,8 +5,13 @@
 
 [![Build history](https://buildstats.info/travisci/chart/Nebo15/man.web)](https://travis-ci.org/Nebo15/man.web)
 
-API: https://github.com/Nebo15/man.api
+![Man Logo](https://github.com/Nebo15/man.api/raw/master/docs/images/logo.png)
 
+Mán stores templates (in `iex`, `mustache`) or `markdown` documents, renders it over HTTP API with dispatch in PDF, JSON or HTML formats.
+
+> "Mán" translates from the Sindarin as "Spirit". Sindarin is one of the many languages spoken by the immortal Elves.
+
+API: https://github.com/Nebo15/man.api
 
 ## Demo
 
@@ -66,3 +71,7 @@ To contribute to the repository be ready to write some tests.
 ### PR
 
 Every task finishes with PR. Eslint, Stylelint, and tests are blocking PRs. To simplify PR review, we deploy every PR's branch automatically on Heroku.
+
+## License
+
+See [LICENSE.md](LICENSE.md).
