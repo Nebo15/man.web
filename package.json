@@ -141,7 +141,7 @@
     "babel-preset-react-hmre": "1.1.1",
     "browserstack-local": "1.2.0",
     "chai": "3.5.0",
-    "chromedriver": "2.25.1",
+    "chromedriver": "2.29.1",
     "concurrently": "2.2.0",
     "coveralls": "2.13.1",
     "enzyme": "2.8.0",
