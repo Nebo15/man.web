@@ -168,7 +168,7 @@
     "karma-webpack": "2.0.3",
     "lint-staged": "3.6.1",
     "mocha": "3.4.2",
-    "nightwatch": "0.9.15",
+    "nightwatch": "0.9.16",
     "react-addons-test-utils": "15.2.1",
     "selenium-download": "2.0.10",
     "selenium-server-standalone-jar": "2.53.1",
