@@ -91,7 +91,7 @@
     "node-cron": "1.2.0",
     "normalizr": "3.2.3",
     "path": "0.12.7",
-    "postcss": "6.0.3",
+    "postcss": "6.0.6",
     "postcss-apply": "0.7.0",
     "postcss-css-variables": "0.7.0",
     "postcss-import": "10.0.0",
