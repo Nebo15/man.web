@@ -62,7 +62,7 @@
     "babel-preset-es2015": "6.24.0",
     "babel-preset-react": "6.23.0",
     "babel-preset-stage-0": "6.22.0",
-    "babel-register": "6.24.0",
+    "babel-register": "6.26.0",
     "chai-spies": "0.7.1",
     "classnames": "2.2.5",
     "cookie-dough": "0.1.0",
