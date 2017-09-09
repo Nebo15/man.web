@@ -130,7 +130,7 @@
     "redux-thunk": "2.1.0",
     "style-loader": "0.18.2",
     "svg-inline-loader": "0.8.0",
-    "svg-inline-react": "1.0.2",
+    "svg-inline-react": "3.0.0",
     "webfonts-loader": "1.2.0",
     "webpack": "3.1.0",
     "webpack-merge": "4.1.0"
