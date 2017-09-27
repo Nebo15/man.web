@@ -136,7 +136,7 @@
     "webpack-merge": "4.1.0"
   },
   "devDependencies": {
-    "babel-eslint": "6.1.2",
+    "babel-eslint": "8.0.1",
     "babel-istanbul-instrumenter-loader": "1.0.1",
     "babel-preset-react-hmre": "1.1.1",
     "browserstack-local": "1.2.0",
