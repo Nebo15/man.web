@@ -89,7 +89,7 @@
     "mustache": "^2.3.0",
     "nebo15-isomorphic-style-loader": "1.0.0",
     "node-cron": "1.2.0",
-    "normalizr": "3.2.3",
+    "normalizr": "3.2.4",
     "path": "0.12.7",
     "postcss": "6.0.4",
     "postcss-apply": "0.7.0",
