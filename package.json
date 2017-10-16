@@ -146,7 +146,7 @@
     "coveralls": "2.13.1",
     "enzyme": "2.9.1",
     "eslint": "3.6.0",
-    "eslint-config-airbnb": "11.2.0",
+    "eslint-config-airbnb": "16.1.0",
     "eslint-import-resolver-babel-module": "2.2.1",
     "eslint-plugin-chai-expect": "1.1.1",
     "eslint-plugin-import": "2.3.0",
