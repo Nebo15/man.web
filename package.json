@@ -97,7 +97,7 @@
     "postcss-import": "10.0.0",
     "postcss-loader": "2.0.6",
     "postcss-math": "0.0.8",
-    "postcss-nested": "2.0.1",
+    "postcss-nested": "3.0.0",
     "precss": "2.0.0",
     "proxy-middleware": "0.15.0",
     "react": "15.2.1",
