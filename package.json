@@ -96,7 +96,7 @@
     "postcss-css-variables": "0.7.0",
     "postcss-import": "10.0.0",
     "postcss-loader": "2.0.6",
-    "postcss-math": "0.0.8",
+    "postcss-math": "0.0.10",
     "postcss-nested": "2.0.1",
     "precss": "2.0.0",
     "proxy-middleware": "0.15.0",
