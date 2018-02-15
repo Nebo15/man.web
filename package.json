@@ -128,7 +128,7 @@
     "redux-multi": "0.1.12",
     "redux-promise": "0.5.3",
     "redux-thunk": "2.1.0",
-    "style-loader": "0.18.2",
+    "style-loader": "0.20.2",
     "svg-inline-loader": "0.8.0",
     "svg-inline-react": "1.0.2",
     "webfonts-loader": "1.2.0",
