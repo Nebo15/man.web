@@ -171,7 +171,7 @@
     "nightwatch": "0.9.16",
     "react-addons-test-utils": "15.2.1",
     "selenium-download": "2.0.10",
-    "selenium-server-standalone-jar": "2.53.1",
+    "selenium-server-standalone-jar": "3.9.1",
     "stylelint": "7.3.1",
     "stylelint-config-standard": "13.0.2",
     "webpack-dashboard": "0.4.0",
