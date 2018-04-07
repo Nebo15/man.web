@@ -56,13 +56,13 @@ exports.setupCssCritical = () => ({
       {
         test: /\.scss/,
         use: [
-          'nebo15-isomorphic-style-loader',
+          'isomorphic-style-loader',
         ].concat(scssLoaders),
       },
       {
         test: /\.css/,
         use: [
-          'nebo15-isomorphic-style-loader',
+          'isomorphic-style-loader',
         ].concat(cssLoaders),
       },
     ],
@@ -144,7 +144,7 @@ exports.setupFontGenCritical = () => ({
       {
         test: /\.font\.(js|json)$/,
         use: [
-          'nebo15-isomorphic-style-loader',
+          'isomorphic-style-loader',
         ].concat(fontLoaders),
       },
     ],
@@ -251,7 +251,7 @@ exports.setupHotReload = (config, port = 3030) => {
     {},
     config, {
       output: {
-        publicPath: `http://0.0.0.0:${port}${config.output.publicPath}`,
+        publicPath: `http://localhost:${port}${config.output.publicPath}`,
       },
       plugins: [
         new webpack.HotModuleReplacementPlugin(),

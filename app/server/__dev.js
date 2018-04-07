@@ -14,7 +14,7 @@ require('babel-register')({
         root: ['../../app/common'],
         alias: {
           tests: '../../tests',
-          withStyles: 'nebo15-isomorphic-style-loader/lib/withStyles',
+          withStyles: 'isomorphic-style-loader/lib/withStyles',
           public: '../../public',
         },
       },
