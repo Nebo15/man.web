@@ -1,6 +1,5 @@
 
-import { Component, Children } from 'react';
-import PropTypes from 'prop-types';
+import { Component, PropTypes, Children } from 'react';
 
 export default class WithStylesContext extends Component {
   static propTypes = {

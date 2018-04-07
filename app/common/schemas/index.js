@@ -1,1 +1,3 @@
-// import { schema } from 'normalizr';
+import { schema } from 'normalizr';
+
+export const template = new schema.Entity('templates');

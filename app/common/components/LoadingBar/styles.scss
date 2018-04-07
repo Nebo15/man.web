@@ -1,0 +1,28 @@
+
+.wrap {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+@keyframes slideinleft {
+  0% {
+    transform: translate3d(-100%, 0, 0);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.bar {
+  background: #37c6e1;
+  height: 2px;
+  box-shadow: 0 0 2px #37c6e1;
+  width: 100%;
+  animation-name: slideinleft;
+  animation-timing-function: linear;
+}
