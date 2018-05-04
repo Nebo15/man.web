@@ -44,7 +44,7 @@
     "Safari 8"
   ],
   "engines": {
-    "node": "7.5.0"
+    "node": "10"
   },
   "author": "Nebo15 <support@nebo15.com> (http://nebo15.com/)",
   "license": "MIT",
