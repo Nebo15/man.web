@@ -113,7 +113,7 @@
     "react-nebo15-validate": "0.1.12",
     "react-nl2br": "0.2.0",
     "react-redux": "5.0.5",
-    "react-router": "2.8.1",
+    "react-router": "4.3.0",
     "react-router-redial": "0.3.4",
     "react-router-redux": "4.0.6",
     "react-router-sitemap": "1.1.1",
