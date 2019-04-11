@@ -10,15 +10,11 @@
 .columns {
   display: flex;
   flex-flow: row nowrap;
-  margin-bottom: 30px;
+  margin: 0 -15px 30px;
 
   & > div {
-    margin-right: 20px;
+    width: 50%;
     flex: 1 1 auto;
-    max-width: 280px;
-
-    &:first-child {
-      max-width: 120px;
-    }
+    padding: 10px;
   }
 }

@@ -22,23 +22,28 @@ export default class FieldCode extends React.Component {
         inputComponent={CodeMirror}
         input={{
           ...input,
-          value: typeof input.value === 'object' ? JSON.stringify(input.value, null, 2) : input.value,
-          onChange: value => value !== input.value && input.onChange(value),
+          value:
+            typeof input.value === 'object'
+              ? JSON.stringify(input.value, null, 2)
+              : input.value,
+          onChange: value => value !== input.value && input.onChange(value)
         }}
-        options={options || {
-          mode: mode || {
-            name: 'application/json',
-            json: true,
-          },
-          placeholder: this.props.placeholder,
-          readOnly: false,
-          lineNumbers: true,
-          indentUnit: 2,
-          tabSize: 2,
-          smartIndent: false,
-          gutters: ['CodeMirror-lint-markers'],
-          lint: true,
-        }}
+        options={
+          options || {
+            mode: mode || {
+              name: 'application/json',
+              json: true
+            },
+            placeholder: this.props.placeholder,
+            readOnly: false,
+            lineNumbers: true,
+            indentUnit: 2,
+            tabSize: 2,
+            smartIndent: false,
+            gutters: ['CodeMirror-lint-markers'],
+            lint: true
+          }
+        }
       />
     );
   }

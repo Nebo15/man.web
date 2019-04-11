@@ -18,6 +18,8 @@ new WebpackDevServer(compiler, {
   // It suppress everything except error, so it has to be set to false as well
   // to see success build.
   noInfo: false,
+  useLocalIp: true,
+  disableHostCheck: true,
   stats: {
     // Config for minimal console.log mess.
     assets: false,

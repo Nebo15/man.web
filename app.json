@@ -12,7 +12,7 @@
     "API_ENDPOINT": {
       "description": "Mán API host",
       "required": true,
-      "value": "https://man-api.herokuapp.com"
+      "value": "http://localhost:8001/"
     },
     "SITEMAP_HOSTNAME": {
       "description": "SITEMAP_HOSTNAME will be used as hostname in sitemap URLs",

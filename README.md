@@ -36,7 +36,7 @@ Application supports these environment variables:
 | Environment Variable  | Default Value           | Description |
 | --------------------- | ----------------------- | ----------- |
 | `PORT`                | `8080`                  | Node.js server port. |
-| `API_ENDPOINT`            | `https://man-api.herokuapp.com` | Mán API endpoint. |
+| `API_ENDPOINT`            | `http://localhost:8001/` | Mán API endpoint. |
 | `SITEMAP_HOSTNAME`    | `http://localhost:8080` | URL will be used in sitemap generated urls |
 | `LANG_COOKIE_NAME`    | `lang`                  | Name of the cookie, where storing language variable |
 
